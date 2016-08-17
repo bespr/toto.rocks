@@ -1,0 +1,9 @@
+parameters:
+    AppBundle.db.table_prefix: toto_
+
+services:
+    AppBundle.tblprefix_subscriber:
+        class: AppBundle\Subscriber\TablePrefixSubscriber
+        arguments: [%AppBundle.db.table_prefix%]
+        tags:
+            - { name: doctrine.event_subscriber }

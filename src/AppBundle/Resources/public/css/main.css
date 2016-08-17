@@ -1,0 +1,96 @@
+html { font-size: 16px; line-height: 1.3em; height: 100%; }
+body { font-family: Arial, sans-serif; color: #333; background: #ddd; margin: 0; height: 100%; }
+
+* { box-sizing: border-box; }
+
+#page { background: white; overflow: hidden; padding: 20px 60px 100px 60px; min-height: 100%; max-width: 1000px; margin: auto; box-shadow: 0 0 10px #888; }
+
+
+header { height: 1px; background-color: #333; text-align: center; }
+header p { display: inline; background-color: white; position: relative; top: -0.5em; padding: 0 20px; }
+
+
+h1 { font-size: 2em; line-height: 1.3em; margin: 32px 0 0 0; clear: both; }
+h2 { font-size: 1.5em; line-height: 1.3em; margin: 12px 0; }
+
+.btn { cursor: pointer; display: inline-block; padding: 10px; background: #ddd; border: 1px solid #333; border-radius: 6px; color: #333; text-decoration: none; }
+.btn:hover { box-shadow: 0 0 10px 1px #88f; }
+
+
+table { max-width: 100%; table-layout: fixed; border-collapse: collapse; }
+
+table.participants { width: 880px; overflow-x: auto; display: block; padding-bottom: 10px; }
+table.participants th { font-weight: normal; font-size: 12px; overflow: hidden; background: #444; border: 1px solid #444; color: white; padding: 4px; }
+table.participants th p { margin: 0; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+table.participants thead th:nth-child(1) { width: 24px; }
+table.participants thead th:nth-child(4) { width: 32px; }
+table.participants tbody td { border: 1px solid #444; padding: 4px; font-size: 14px; text-align: center; overflow: hidden; }
+table.participants tbody td:nth-child(2) { text-align: left; }
+table.participants tbody td:nth-child(3) { text-align: left; font-size: 0.75em; }
+table.participants tbody td span { font-size: 12px; color: #888; }
+
+
+
+.gameList { list-style-type: none; margin: 20px 0; padding: 0; border-top: 1px dashed #ccc; }
+.gameList li { margin-top: 10px; overflow: hidden; border-bottom: 1px dashed #ccc; }
+.gameList li .date { float: left; width: 120px; line-height: 2em; }
+.gameList li .home { float: left; width: 200px; line-height: 2em; }
+.gameList li .away { float: left; width: 200px; line-height: 2em; }
+.gameList li .home-score { float: left; width: 80px; }
+.gameList li .away-score { float: left; width: 60px; }
+.gameList input { width: 60px; margin: 0 0 10px 0; }
+
+.form-row  { overflow: hidden; }
+.form-row label { float: left; width: 140px; margin: 14px 6px 0 0; font-weight: bold; text-align: right; }
+.form-row input,
+.form-row select{ float: left; width: 400px; }
+
+input,
+select { border-radius: 3px; border: 1px solid #999; padding: 0.375em; font-size: 1em; margin: 0.5em; }
+input:focus,
+select:focus { box-shadow: 0 0 10px 1px #88f; outline: none; }
+
+.submitSheet { width: 100%; max-width: 320px; margin: 20px 0; }
+
+.backlink,
+.printlink { float: left; text-decoration: underline; color: #008; margin: 10px 0 20px 0; font-size: 14px; cursor: pointer; }
+.printlink { float: right; }
+
+.alert { padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px; color: #31708f; background-color: #d9edf7;
+  border-color: #bce8f1 }
+.alert .token { font-weight: bold; font-size: 1.25em; }
+
+
+
+
+@media screen and (max-width: 850px) {
+    .gameList li .date { width: 18%; }
+    .gameList li .home { width: 30%; }
+    .gameList li .away { width: 30%; }
+    .gameList li .home-score { width: 56px; }
+    .gameList li .away-score { width: 40px; }
+    .gameList input { width: 40px;  }
+
+    .form-row label { float: left; width: 20%; }
+    .form-row input,
+    .form-row select{ float: left; width: 70%; }
+}
+
+
+@media screen and (max-width: 600px) {
+    #page { padding: 20px; }
+    ol { padding-left: 30px; }
+    ol ul { padding-left: 20px; }
+
+    .gameList li .date { float: none; width: 100%; }
+    .gameList li .home { float: none; width: 100%; }
+    .gameList li .away { float: none; width: 100%; }
+    .gameList li .home-score { float: left; width: 56px; }
+    .gameList li .away-score { float: left; width: 40px; }
+    .gameList input { width: 40px; margin: 0 0 10px 0; }
+
+    .form-row label { float: none; width: 100%; margin: 14px 6px 0 0; text-align: left; display: block; }
+    .form-row input,
+    .form-row select { margin: 0; float: none; width: 100%; }
+
+}

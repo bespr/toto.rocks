@@ -1,0 +1,37 @@
+AppBundle\Entity\Sheet:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Entity\SheetRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        seasonId:
+            type: integer
+            column: season_id
+        contact:
+            type: string
+            length: 255
+            nullable: true
+        name:
+            type: string
+            length: 255
+        email:
+            type: string
+            length: 255
+            nullable: true
+        token:
+            type: string
+            length: 255
+        hasPaid:
+            type: boolean
+            column: has_paid
+            nullable: true
+        isDisqualified:
+            type: boolean
+            column: is_disqualified
+            nullable: true
+    lifecycleCallbacks: {  }

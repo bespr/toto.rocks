@@ -1,0 +1,63 @@
+{% extends 'AppBundle::baseAdmin.html.twig' %}
+
+{% block body %}
+
+    <h1>{{ teamName }} – {{ seasonName }}</h1>
+
+    <a href="{{ path('adminSeasons', {'team' : teamUniqueName }) }}">Aktive Saison wechseln</a>
+
+    <h2>Resultate eintragen</h2>
+    <ul class="adminList">
+    {% for game in games %}
+        <li>
+            {{game.date | date('d.m.Y') }} | {{ game.home }} - {{ game.away }}
+            <form method="post" action="" class="resultInputForm">
+                <input type="text" name="homeScore" value="{{ game.homeScore }}" class="resultInput" />
+                <input type="text" name="awayScore" value="{{ game.awayScore }}" class="resultInput" />
+                <input type="hidden" name="gameId" value="{{ game.id }}" />
+                <input type="hidden" name="cmd" value="saveResult" />
+                <input type="submit" value="save" />
+            </form>
+    {% endfor %}
+    </ul>
+
+    <a href="{{ path('adminGames', {'team' : teamUniqueName }) }}">Spiele dieser Saison erfassen und verwalten</a>
+
+
+    <h2>Noch nicht bezahlt</h2>
+    <ul>
+    {% for sheet in sheets.notPaid %}
+        <li>
+            {{ sheet.name }} ({{ sheet.contact }})
+            <form method="post" action="">
+                <input type="hidden" name="sheetId" value="{{ sheet.id}}" />
+                <input type="hidden" name="cmd" value="markAsPaid" />
+                <input type="submit" value="Mark as Paid" />
+            </form>
+    {% endfor %}
+    </ul>
+
+
+    <h2>Bereits bezahlt</h2>
+    <ul>
+    {% for sheet in sheets.paid %}
+        <li>
+            {{ sheet.name }} ({{ sheet.contact }})
+            <form method="post" action="">
+                <input type="hidden" name="sheetId" value="{{ sheet.id}}" />
+                <input type="hidden" name="cmd" value="markAsNotPaid" />
+                <input type="submit" value="Mark as Not paid" />
+            </form>
+    {% endfor %}
+    </ul>
+    
+    <form class="formBox" method="post" action="">
+        <h2>Mögliche Spielerkontakte</h2>
+        <textarea class="longArea" name="contacts">{{ contactsNewLine }}</textarea>
+        <input type="hidden" name="cmd" value="updateContacts" />
+        <input type="submit" value="Update Spielerkontakte" />
+    </form>
+    
+
+
+{% endblock %}

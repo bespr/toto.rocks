@@ -1,0 +1,58 @@
+.print-only { display: none; }
+
+@media print {
+    .print-only { display: inline; }
+    .print-hide { display: none; }
+
+    /*.manual:after { content: ' Mehr Zettel zum Ausdrucken findest du hier: toto.oberholzer.li/rss/new (Zugangswort solltest du bekommen haben)' } */
+
+    #page { width: 100%; margin: 0; padding: 0; box-shadow: none; }
+
+    header { display: none;  }
+    .teamName { font-size: 20px; margin: 0 0 4px 0; }
+    h2 { font-size: 16px; margin: 0; }
+    .teamName:before { content: 'Toto: '; }
+
+    .gameList { margin: 10px 0 10px 0; }
+    .gameList li { margin-top: 4px; font-size: 14px; }
+    .gameList li .date { width: 18%; }
+    .gameList li .home { width: 30%; }
+    .gameList li .away { width: 30%; }
+    .gameList li .home-score { width: 56px; }
+    .gameList li .away-score { width: 40px; }
+    .gameList input { width: 40px; margin-bottom: 4px; }
+
+    .form-row { overflow: hidden; }
+    .form-row label { float: left; width: 20%; font-size: 14px; font-weight: normal; margin-top: 22px; }
+    .form-row input,
+    .form-row select { float: left; width: 70%; border-color: transparent; border-bottom: 1pt solid black; border-radius: 0; }
+
+    form { overflow: hidden; }
+
+    .printDisclaimer { display: block; margin-top: 24px; font-size: 11px; line-height: 1.3em; }
+    .printDisclaimer span { display: block; font-style: italic; }
+
+    .rules { font-size: 11px; line-height: 1.3em; }
+    .rules h3 { margin: 10px 0 2px 0; }
+    .rules ol { margin: 0; }
+
+
+    ::-webkit-input-placeholder { /* WebKit browsers */
+        color: transparent;
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: transparent;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: transparent;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10+ */
+        color: transparent;
+    }
+
+
+
+
+}
+
+

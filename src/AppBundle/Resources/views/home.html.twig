@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Toto</h1>
+
+    {% for team in teams %}
+        <h2>{{ team.name }}</h2>
+        <a href="{{ path('team', { team: team.uniqueName }) }}">Übersicht</a>
+        <a href="{{ path('newSheet', { team: team.uniqueName }) }}">Neuer Tipp abgeben</a>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'AppBundle::baseAdmin.html.twig' %}
+
+{% block body %}
+
+    <h1>Team {{ team.getName() }}</h1>
+    <a href="{{ path('admin', {'team' : team.getUniqueName() }) }}" class="headingLink">Zur Haupt-Admin-Seite</a>
+    
+    <h2>Spiele verwalten</h2>
+    <ul class="adminList">
+        {% for game in games %}
+            <li>
+                <form method="post" action="{{ path('adminPostGames', {'team' : team.getUniqueName() }) }}">
+                    <div class="formGroup">
+                        <label>
+                            Datum
+                            <input name="date" value="{{ game.getDate()|date('d.m.Y') }}" />
+                        </label>
+                    </div>
+                    <div class="formGroup">
+                        <label>
+                            Home
+                            <input name="home" value="{{ game.getHome() }}" />
+                        </label>
+                        <label>
+                            Home-Notiz
+                            <input name="homeNotes" value="{{ game.getHomeNotes() }}" />
+                        </label>            
+                        {% if game.getHomeScore() is not null %}
+                            <span class="score">{{ game.getHomeScore() }} Tore</span>
+                        {% endif %}
+                    </div>                          
+                    <div class="formGroup">
+                        <label>
+                            Away
+                            <input name="away" value="{{ game.getAway() }}" />
+                        </label>
+                        <label>
+                            Away-Notiz
+                            <input name="awayNotes" value="{{ game.getAwayNotes() }}" />
+                        </label>   
+                        {% if game.getAwayScore() is not null %}
+                            <span class="score">{{ game.getAwayScore() }} Tore</span>
+                        {% endif %}                        
+                    </div>                       
+                    
+                    <input type="hidden" name="gameId" value="{{ game.getId() }}" />
+                    <input type="hidden" name="cmd" value="saveGame" />
+                    <input type="submit" value="speichern" />
+                        
+                </form>
+                        
+            </li>
+        {% endfor %}
+    </ul>
+    
+    
+    <h2>Neues Spiel erfassen</h2>
+    
+    
+    <ul class="adminList">
+        <li>
+            <form method="post" action="{{ path('adminPostGames', {'team' : team.getUniqueName() }) }}">
+                <div class="formGroup">
+                    <label>
+                        Datum
+                        <input name="date" value="" /> <span class="inputHelp">Format: 01.02.2016 (Nullen nicht vergessen)</span>
+                    </label>
+                </div>
+                <div class="formGroup">
+                    <label>
+                        Home
+                        <input name="home" value="" />
+                    </label>
+                    <label>
+                        Home-Notiz
+                        <input name="homeNotes" value="" />
+                    </label>            
+
+                <div class="formGroup">
+                    <label>
+                        Away
+                        <input name="away" value="" />
+                    </label>
+                    <label>
+                        Away-Notiz
+                        <input name="awayNotes" value="" />
+                    </label>                         
+                </div>    
+
+
+                <input type="hidden" name="seasonId" value="{{ season.getId() }}" />
+                <input type="hidden" name="cmd" value="addGame" />
+                <input type="submit" value="speichern" />
+
+            </form>
+
+        </li>
+    </ul>    
+    
+
+{% endblock %}

@@ -1,0 +1,24 @@
+AppBundle\Entity\Bet:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Entity\BetRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        sheetId:
+            type: integer
+            column: sheet_id
+        gameId:
+            type: integer
+            column: game_id
+        homeScore:
+            type: smallint
+            column: home_score
+        awayScore:
+            type: smallint
+            column: away_score
+    lifecycleCallbacks: {  }

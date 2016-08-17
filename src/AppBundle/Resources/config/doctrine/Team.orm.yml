@@ -1,0 +1,30 @@
+AppBundle\Entity\Team:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Entity\TeamRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        uniqueName:
+            type: string
+            length: 255
+            column: unique_name
+        accessword:
+            type: string
+            length: 255
+        adminword:
+            type: string
+            length: 255
+        contacts:
+            type: text
+        isActive:
+            type: boolean
+            column: is_active
+    lifecycleCallbacks: {  }

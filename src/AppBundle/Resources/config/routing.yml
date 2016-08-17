@@ -1,0 +1,71 @@
+removeTrailingSlash:
+    path: /{url}
+    defaults: { _controller: AppBundle:Redirecting:removeTrailingSlash }
+    requirements:
+        url: .*/$
+    methods: [GET]
+
+home:
+    path:      /
+    defaults:  { _controller: AppBundle:Home:index }
+    methods:   [GET]
+
+team:
+    path:      /{team}
+    defaults:  { _controller: AppBundle:Team:index }
+    methods:   [GET]
+
+admin:
+    path:      /{team}/admin
+    defaults:  { _controller: AppBundle:Admin:index }
+    methods:   [GET]
+
+saveAdmin:
+    path:      /{team}/admin
+    defaults:  { _controller: AppBundle:Admin:post }
+    methods:   [POST]
+
+adminSeasons:
+    path:      /{team}/admin/seasons
+    defaults:  { _controller: AppBundle:Admin:seasons }
+    methods:   [GET]
+
+adminPostSeasons:
+    path:      /{team}/admin/seasons
+    defaults:  { _controller: AppBundle:Admin:seasonsPost }
+    methods:   [POST]
+
+adminGames:
+    path:      /{team}/admin/games
+    defaults:  { _controller: AppBundle:Admin:games }
+    methods:   [GET]
+    
+adminPostGames:
+    path:      /{team}/admin/games
+    defaults:  { _controller: AppBundle:Admin:gamesPost }
+    methods:   [POST]    
+
+newSheet:
+    path:      /{team}/new
+    defaults:  { _controller: AppBundle:Sheet:new }
+    methods:   [GET]
+
+editSheet:
+    path:      /{team}/new
+    defaults:  { _controller: AppBundle:Sheet:save }
+    methods:   [POST]
+
+existingSheet:
+    path:      /{team}/t{token}
+    defaults:  { _controller: AppBundle:Sheet:existing }
+    methods:   [GET]
+
+teamAccess:
+    path:     /{team}/teamAccess
+    defaults:  { _controller: AppBundle:Team:access }
+    methods:   [POST]
+
+adminAccess:
+    path:     /{team}/adminAccess
+    defaults:  { _controller: AppBundle:Admin:access }
+    methods:   [POST]

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta charset="UTF-8" />
+        <title>{% block title %}Toto{% endblock %}</title>
+        <link href="{{ asset('bundles/app/css/main.css') }}" rel="stylesheet" />
+        <link href="{{ asset('bundles/app/css/print.css') }}" rel="stylesheet" />
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div id="page">
+            <header>
+                <p>TOTO.ROCKS</p>
+            </header>
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}
+        </div>
+    </body>
+</html>

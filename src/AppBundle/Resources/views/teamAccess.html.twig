@@ -1,0 +1,14 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+
+    <div style="width: 300px; margin: 60px auto;">
+        <h2>Zugangswort</h2>
+        <form method="post" action="{{ path('teamAccess', { team: team }) }}">
+            <input type="password" name="accessword" value="" style="margin-left: 0;" />
+            <input type="hidden" name="path" value="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}" />
+            <input type="submit" value="ok" />
+        </form>
+    </div>
+
+{% endblock %}

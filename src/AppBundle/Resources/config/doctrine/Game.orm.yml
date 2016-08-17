@@ -1,0 +1,39 @@
+AppBundle\Entity\Game:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Entity\GameRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        seasonId:
+            type: integer
+            column: season_id
+        home:
+            type: string
+            length: 255
+        homeNotes:
+            type: string
+            length: 255
+            column: home_notes
+        away:
+            type: string
+            length: 255
+        awayNotes:
+            type: string
+            length: 255
+            column: away_notes
+        date:
+            type: date
+        homeScore:
+            type: smallint
+            column: home_score
+            nullable: true
+        awayScore:
+            type: smallint
+            column: away_score
+            nullable: true
+    lifecycleCallbacks: {  }

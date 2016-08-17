@@ -1,0 +1,113 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block title %}{{ teamName }} - Toto - {{ seasonName }}{% endblock %}
+
+{% block body %}
+
+    <a class="print-hide backlink" href="{{ path('team', {'team' : teamUniqueName }) }}">&laquo; Zurück zur Übersicht</a>
+
+    <a class="print-hide printlink" onclick="window.print(); return false;">Ausdrucken und später in Ruhe ausfüllen &raquo;</a>
+
+    <h1 class="teamName">{{ teamName }}</h1>
+    <h2>{{ seasonName }}</h2>
+
+
+    {% if (message is defined) and (message == "token") %}
+        <div class="alert print-hide">
+            Merci fürs Ausfüllen des Toto-Zettels. Dein Zettel hat das Token » <span class="token">t{{ token }}</span> « erhalten.<br />
+            Du kannst auch später deine Tipps noch bearbeiten (bis spätestens 1 Tag vor Anpfiff), wenn du das Token deines Toto-Zettels kennst.<br />
+            Die URL zu deinem Zettel lautet: <span class="token">http://toto.oberholzer.li/{{teamUniqueName}}/t{{ token }}</span>.<br />
+            Bitte dein Token niemandem weitersagen! Dein Toto-Zettel ist sonst nicht geschützt.
+        </div>
+    {% else %}
+        {% if token is defined %}
+        <div class="alert print-hide">
+            Du bearbeitest gerade den bestehenden Toto-Zettel mit dem Token » <span class="token">t{{ token }}</span> «
+        </div>
+        {% endif %}
+    {% endif %}
+
+    <form method="post" action="{{ path('editSheet', {'team' : teamUniqueName }) }}">
+        <ul class="gameList">
+
+            {% for game in games %}
+                <li>
+                    <div class="date">{{ game.date|date('d.m.Y') }}</div>
+                    <div class="home" title="{{ game.homeNotes }}">{{ game.home }}</div>
+                    <div class="away"title="{{ game.awayNotes }}">{{ game.away }}</div>
+                    <div class="home-score">
+                        {% if game.locked %}
+                            <span class="lockedScore">
+                            {% if score[game.id].home is defined %}
+                                {{ score[game.id].home }}
+                            {% else %}
+                                leer
+                            {% endif %}
+                            </span>
+                        {% else %}
+                            <input type="text" name="gameHome[{{ game.id }}]"
+                                {% if score[game.id].home is defined %} value="{{ score[game.id].home }}" {% endif %} />
+                        {% endif %}
+                    </div>
+                    <div class="away-score">
+                        {% if game.locked %}
+                            <span class="lockedScore">
+                            {% if score[game.id].away is defined %}
+                                {{ score[game.id].away }}
+                            {% else %}
+                                leer
+                            {% endif %}
+                            </span>
+                        {% else %}
+                            <input type="text" name="gameAway[{{ game.id }}]"
+                                {% if score[game.id].away is defined %} value="{{ score[game.id].away }}" {% endif %} />
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="form-row">
+            <label>Name:</label>
+            <input type="text" name="name" placeholder="Deinen Namen eintragen" pattern=".{3,}" required title="3 characters minimum" value="{{ name }}" />
+        </div>
+
+        <div class="form-row">
+            <label>Spielerkontakt:</label>
+            <input type="text" class="print-only" />
+            <select name="contact" class="print-hide">
+                <option>-- Bitte auswählen --</option>
+                {% for contact in contacts %}
+                    <option{% if selectedContact == contact %} selected{% endif %}>{{ contact }}</option>
+                {% endfor %}
+                <option>Ich kenne keinen einzigen der gelisteten Spieler</option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label>E-Mail:</label>
+            <input type="email" name="email" placeholder="Deine E-Mail-Adresse eintragen" required value="{{ email }}" />
+        </div>
+
+
+        {% if cmd == 'update' %}
+        <input type="hidden" name="token" value="{{ token }}" />
+        {% endif %}
+
+        <input type="hidden" name="seasonId" value="{{ seasonId }}" />
+        <input type="submit" value="Speichern" class="submitSheet btn print-hide" />
+    </form>
+
+
+    <div class="print-only printDisclaimer">
+        Noch vor dem ersten Spiel ausfüllen und an Beat Oberholzer oder sonst einem Spieler der Mannschaft abgeben.
+        <span>Kann auch elektronisch ausgefüllt werden unter: http://toto.oberholzer.li/rss (Zugangswort bei jedem Spieler der Mannschaft erhältlich)</span>
+    </div>
+
+    <div class="rules">
+    {{ include('AppBundle::rules.html.twig') }}
+    </div>
+
+
+
+{% endblock %}

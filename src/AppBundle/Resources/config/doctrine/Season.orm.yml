@@ -1,0 +1,21 @@
+AppBundle\Entity\Season:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Entity\SeasonRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        teamId:
+            type: integer
+            column: team_id
+        isCurrent:
+            type: boolean
+            column: is_current
+    lifecycleCallbacks: {  }

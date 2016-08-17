@@ -1,0 +1,67 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block title %}{{ teamName }} - Toto - {{ seasonName }}{% endblock %}
+
+{% block body %}
+    
+
+    <h1>{{ teamName }}</h1>
+    <h2>{{ seasonName }}</h2>
+
+    <p>Stand nach {{ countGamesPlayed }} / {{ countGamesPlayed + countGamesNotPlayed }} Spielen: </p>
+
+    <div class="tableScrollWrap">
+        <table class="participants">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    {% for g in games %}
+                        <th>
+                            <p class="date">{{ g.date|date('d.m.') }}</p>
+                            <p class="home">{{ g.home }}</p>
+                            <p class="away">{{ g.away }}</p>
+                            <p class="score">{{ g.homeScore }} : {{ g.awayScore }}</p>
+                        </th>
+                    {% endfor %}
+                <tr>
+            </thead>
+            <tbody>
+            {% for p in participants.paid %}
+                <tr>
+                    <td>{{ p.rank }}.</td>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.contact }}</td>
+                    <td>{{ p.points }}</td>
+                    {% for g in games %}
+                        <td>
+                        {% if g.isPlayed == true %}
+                            {{ p.bets[g.id].homeScore }} : {{ p.bets[g.id].awayScore }}
+                            <span>({{ p.bets[g.id].points }})</span>
+                        {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <h4>Ausgefüllt, aber noch nicht bezahlt: </h4>
+
+    <ul>
+    {% for p in participants.notPaid %}
+        <li>
+            {{ p.name }}, via {{ p.contact }}
+        </li>
+    {% endfor %}
+    </ul>
+
+    <h3>Selber teilnehmen</h3>
+    <a class="btn" href="{{ teamUniqueName }}/new">Neuen Zettel ausfüllen</a>
+
+    {{ include('AppBundle::rules.html.twig') }}
+
+{% endblock %}

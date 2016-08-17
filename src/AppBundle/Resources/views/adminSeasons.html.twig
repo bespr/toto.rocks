@@ -1,0 +1,39 @@
+{% extends 'AppBundle::baseAdmin.html.twig' %}
+
+{% block body %}
+
+   
+    <h1>Team {{ team.getName() }}</h1>
+    <a href="{{ path('admin', {'team' : team.getUniqueName() }) }}" class="headingLink">Zur Haupt-Admin-Seite</a>
+    
+
+    <h2>Saisons</h2>
+
+    <form class="formBox" method="post" action="{{ path('adminPostSeasons', {'team' : team.getUniqueName() }) }}">
+        <h3>Neue Saison eröffnen</h3>
+        <label for="newSeason">Name der neuen Saison</label>
+        <input type="text" id="newSeason" name="newSeason" />
+        <p class="inputHelp">z.B. «Hinrunde 2015/16»</p>
+        <input type="hidden" name="cmd" value="addSeason" />
+        <input type="submit" value="Saison Einfügen" />
+    </form>
+
+    <h3>Bestehende Saisons</h3>
+    <ul class="adminList">
+    {% for season in seasons %}
+        <li{{ season.isCurrent ? ' class="active"' : '' }}>
+            <b>{{season.name }}</b>
+            {% if (season.isCurrent) %}
+                <input type="button" disabled value="AKTIVE SAISON" />
+            {% else %}
+                <form method="post" action="{{ path('adminPostSeasons', {'team' : team.getUniqueName() }) }}">
+                    <input type="hidden" name="cmd" value="setActiveSeason" />
+                    <input type="hidden" name="seasonId" value="{{ season.id }}" />
+                    <input type="submit" value="Zur aktiven Saison machen" />
+                </form>
+            {% endif %}
+            <i>{{ season.numOfGames }} Spiel{{ season.numOfGames != 1 ? 'e' }} erfasst</i>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}

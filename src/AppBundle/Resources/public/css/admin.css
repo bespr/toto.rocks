@@ -1,0 +1,28 @@
+body { background: black; color: #eee; }
+#page { box-shadow: none; background: #444; border-left: 1px solid #eee; border-right: 1px solid #eee; }
+header { background-color: #eee; }
+header p { background-color: #444; }
+header p:after { content: ' – ADMIN'; }
+
+a { color: inherit; }
+.headingLink { margin-top: 1em; }
+
+/* Forms */
+
+.resultInputForm { display: inline-block; }
+.resultInput { width: 40px; margin-left: 0; }
+
+.formBox { border: 1px solid #eee; padding: 10px; }
+.formBox h3 { margin: 0; }
+.formBox p { margin: 0; }
+.formBox input[type="submit"] { margin: 0.5em 0 0 0; }
+
+.longArea { min-height: 300px; min-width: 240px; }
+.inputHelp { font-style: italic; }
+
+/* Lists */
+
+.adminList { list-style-type: none; padding: 0; }
+.adminList li { background: #2f2828; padding: 0.25em 0.5em; margin-bottom: 0.25em; border-radius: 0.5em; }
+.adminList li.active { background: #262; }
+.adminList form { display: inline; }   
