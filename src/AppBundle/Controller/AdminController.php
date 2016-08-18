@@ -188,6 +188,12 @@ class AdminController extends BaseController
         } elseif ($cmd === 'updateContacts') {
             $contactsStr = $post->get('contacts');
             $contactsArr = explode("\n", $contactsStr);
+            foreach ($contactsArr as $i => $contact) {
+                $contact = trim($contact);
+                if ($contact !== '') {
+                    $contactsArr[$i] = $contact;
+                }
+            }
             sort($contactsArr);
 
             /* @var $teamDb \AppBundle\Entity\Team */
