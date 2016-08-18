@@ -191,7 +191,7 @@ class AdminController extends BaseController
             sort($contactsArr);
 
             /* @var $teamDb \AppBundle\Entity\Team */
-            $teamDb = $em->getRepository('AppBundle:Team')->findOneByUniqueName($team);            
+            $teamDb = $em->getRepository('AppBundle:Team')->findOneByUniqueName($team);
             $teamDb->setContacts(implode('|', $contactsArr));
             $em->persist($teamDb);
         }
@@ -217,23 +217,23 @@ class AdminController extends BaseController
         $data = array();
 
         $db = $this->getDoctrine();
-        
+
         /* @var $team \AppBundle\Entity\Team */
         $teamDb = $db->getRepository('AppBundle:Team')->findOneByUniqueName($team);
         $activeSeason = $db->getRepository('AppBundle:Season')->findOneBy(array('teamId' => $teamDb->getId(), 'isCurrent' => true));
         $games = $db->getRepository('AppBundle:Game')->findBySeasonId($activeSeason->getId(), array('date' => 'ASC'));
-        
+
         $data = array(
             'team' => $teamDb,
             'season' => $activeSeason,
             'games' => $games
         );
-                
+
         return $this->render('AppBundle::adminGames.html.twig', $data);
     }
-    
-    
-    
+
+
+
     public function gamesPostAction($team, Request $req)
     {
         $post = $req->request;
@@ -247,22 +247,22 @@ class AdminController extends BaseController
             $game->setHome($post->get('home'));
             $game->setAway($post->get('away'));
             $game->setHomeNotes($post->get('homeNotes'));
-            $game->setAwayNotes($post->get('awayNotes'));            
+            $game->setAwayNotes($post->get('awayNotes'));
             $game->setSeasonId($post->get('seasonId'));
             $em->persist($game);
         } elseif ($cmd === 'editGame') {
             $game = $em->getRepository('AppBundle:Game')->findOneById($post->get('gameId'));
-            $game->setDate($post->get('date'));
+            $game->setDate(\DateTime::createFromFormat('d.m.Y', $post->get('date')));
             $game->setHome($post->get('home'));
             $game->setAway($post->get('away'));
             $game->setHomeNotes($post->get('homeNotes'));
-            $game->setAwayNotes($post->get('awayNotes'));     
+            $game->setAwayNotes($post->get('awayNotes'));
             $em->persist($game);
-        } 
+        }
         $em->flush();
 
         return $this->redirectToRoute('adminGames', array('team' => $team));
-    }    
+    }
 
 
 
